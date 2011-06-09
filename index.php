@@ -19,7 +19,8 @@
 				var bounds = new google.maps.LatLngBounds();
 				
 <?php
-				$mysqli = new mysqli('localhost','root','Superc0g','occupy');
+				require("config.php");
+				$mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
 				if (!$result = $mysqli->query("SELECT id, title, short, lat, lng FROM occupation WHERE showmap='1'")) {
 					echo $mysqli->error;
 				}

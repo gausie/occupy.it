@@ -1,6 +1,8 @@
 <?php
 
-$mysqli = new mysqli('localhost','root','Superc0g','occupy');
+require("config.php");
+
+$mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
 //This is where we will query the database and pull using the cities/states SELECT statement
 // If the result returns true
 if ($result = $mysqli->query("SELECT * FROM occupation WHERE short='{$_GET['short']}'")) {
