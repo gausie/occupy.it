@@ -27,7 +27,7 @@ $mysqli->close();
 	
 		<title><?php echo $title; ?> | occupy.it</title>
 		
-		<base href="http://localhost/occupy.it/" />
+		<base href="<?php echo $config['base']; ?>" />
 		
 		<link rel="stylesheet" href="style.css" />
 		

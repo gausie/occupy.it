@@ -1,7 +1,9 @@
-<html>
+<?php require("config.php"); ?><html>
 
 	<head>
 		<title>occupy.it; bringing together informations about political occupations around the UK</title>
+		
+		<base href="<?php echo $config['base']; ?>" />
 		
 		<link rel="stylesheet" href="style.css" />
 		
