@@ -1,4 +1,21 @@
-<?php require("config.php"); ?><html>
+<?php require("config.php"); 
+
+if(isset($_POST['title'])){
+	
+	$_POST['showmap'] = ($_POST['showmap']=="on")?"1":"0";
+	
+	$query = "INSERT INTO occupation VALUES ('', '{$_POST['title']}', '{$_POST['short']}', '{$_POST['twitter']}', '{$_POST['blog']}', '{$_POST['lat']}', '{$_POST['lng']}', '{$_POST['showmap']}', '{$_POST['email']}', '0')";
+	
+	$mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
+	if (!$result = $mysqli->query($query)) {
+		$result = "<b>".$mysqli->error."</b>";
+	}else{
+		$result = "Application submitted. Please check your emails for correspondance.";
+	}
+	$mysqli->close();
+}
+
+?><html>
 
 	<head>
 		<title>occupy.it; bringing together informations about political occupations around the UK</title>
@@ -19,6 +36,7 @@
 					center: new google.maps.LatLng(54.597528,-3.032227),
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				});
+				// event listener to update lng and lat on click
 				function findAddress(address) {
 					geocoder.geocode( { 'address': address}, function(results, status) {
 						if (status == google.maps.GeocoderStatus.OK) {
@@ -48,7 +66,9 @@
 
 			<p>Until we work out a better way of doing it, we'll have to manually approve all applications. Fill in your information on the form below and we'll get in contact.</p>
 			
-			<form>
+			<?php if(isset($result)){ echo "<p>{$result}</p>"; } ?>
+			
+			<form action="apply/" method="POST">
 
 				<fieldset>
 				

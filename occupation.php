@@ -5,7 +5,7 @@ require("config.php");
 $mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
 //This is where we will query the database and pull using the cities/states SELECT statement
 // If the result returns true
-if ($result = $mysqli->query("SELECT * FROM occupation WHERE short='{$_GET['short']}'")) {
+if ($result = $mysqli->query("SELECT * FROM occupation WHERE short='{$_GET['short']}' AND verified='1'")) {
 	if($result->num_rows>0){
 		$occ = $result->fetch_object();
 		$title = $occ->title;

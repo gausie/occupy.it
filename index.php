@@ -21,7 +21,7 @@
 <?php
 				require("config.php");
 				$mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
-				if (!$result = $mysqli->query("SELECT id, title, short, lat, lng FROM occupation WHERE showmap='1'")) {
+				if (!$result = $mysqli->query("SELECT id, title, short, lat, lng FROM occupation WHERE showmap='1' AND verified='1'")) {
 					echo $mysqli->error;
 				}
 
