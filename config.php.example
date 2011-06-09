@@ -1,0 +1,10 @@
+<?php
+
+// Add the correct details here to connect to your MySQL database and then rename this file to config.php
+
+$config['hostname'] = "localhost";
+$config['username'] = "";
+$config['password'] = "";
+$config['database'] = "";
+
+?>

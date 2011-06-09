@@ -1,0 +1,102 @@
+body {
+	background-color: lightgrey;
+	font-family: Arial;
+}
+
+h1 {
+	text-transform: lowercase;
+	font-family: Arial;
+}
+
+#content, aside {
+	background-color: white;
+	border-radius: 15px;
+	padding: 5px 10px 5px 10px;
+}
+
+#content {
+	min-height: 400px;
+}
+
+#content.with_aside {
+	margin-right: 32%;
+}
+
+.centered {
+	text-align: center;
+}
+
+h1 span {
+	color: darkgrey;
+}
+
+aside {
+	float: right;
+	width: 30%;
+}
+
+article {
+	border-bottom: 1px dashed darkgrey;
+}
+
+#occupation_map {
+	width: 100px;
+	height: 100px;
+}
+
+#overall_map {
+	width: 330px;
+	height: 500px;
+	margin: 0 auto 0 auto;
+}
+
+#select_map {
+	width: 500px;
+	height: 300px;
+	margin: 10px auto 10px auto;
+}
+
+.loading {
+	margin: 10px auto 10px auto;
+	height: 55px;
+	background: url('./loading.gif') no-repeat center center;
+}
+
+.loading span {
+	margin-left: -10000px;
+}
+
+form label { 
+	display: block;
+	float: left; 
+	width: 150px; 
+	padding: 0; 
+	margin: 5px 5px 0;
+	text-align: right; 
+}
+
+form input, form textarea {
+    display: block;
+    margin: 5px 0px 0px 170px;
+}
+
+.unrelated {
+	display: inline;
+	margin: auto;
+}
+
+form {
+  margin: 0 auto 0 auto;
+  padding: 0;
+  min-width: 500px;
+  max-width: 600px;
+  width: 560px; 
+}
+
+form fieldset {
+  border-color: #000;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+}

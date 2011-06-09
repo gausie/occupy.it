@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^apply/?$ apply.php
+RewriteRule ^about/?$ about.php
+RewriteRule ^([A-Za-z0-9-]+)/?$ occupation.php?short=$1 [L]
