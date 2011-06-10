@@ -51,7 +51,7 @@
 		
 		<div id="content" class="centered">
 		
-			<h1>occupy<span>it</span></h1>
+			<h1>occupy<span>it</span> (&#914;)</h1>
 
 			<p>Click on an occupation to see its profile.</p>
 			

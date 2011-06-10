@@ -24,6 +24,8 @@ if(isset($_POST['title'])){
 		}
 		$mysqli->close();
 		
+		//email
+		
 	}
 	
 }
@@ -38,7 +40,7 @@ if(isset($_POST['title'])){
 		<link rel="stylesheet" href="style.css" />
 		
 		<script type="text/javascript" src="jquery-1.6.min.js"></script>
-		<script type="text/javascript" src="jquery.color.js"></script>
+		<script type="text/javascript" src="jquery.color.min.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&region=GB"></script>
 		
 		<script type="text/javascript">

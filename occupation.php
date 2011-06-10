@@ -42,18 +42,32 @@ $mysqli->close();
 					var $domNode = this;
 					$domNode.empty().append("<div class='loading'><span>Loading...</span></div>");
 					$.get("xs.php?u="+url, function(data){
+						//Fairly messily done - attempts to guess RSS schema. Suggestions?
 						$domNode.empty();
-						var $articles = $(data).find("item");
+						var post_tag = ["item", "entry"]; var i = 0;
+						while( (i<post_tag.length)){
+							$articles = $(data).find(post_tag[i]);
+							if($articles.size()>0){
+								break;
+							}
+							i++;
+						}
 						$articles.each(function(){
 							$article = $(this);
-							$domNode.append("<article><h2>"+$article.children('title').text()+"</h2>"+$article.children("description").text()+"</article>");
+							var $content = $article.children("description");
+							if($content.size()==0){
+								$content = $article.children("content");
+							}
+							var $href = $article.children("link");
+							var href = ($href.text()=='')?$href.attr('href'):$href.text();
+							$domNode.append("<article><h2><a href='"+href+"'>"+$article.children('title').text()+"</a></h2>"+$content.text()+"</article>");
 						});
 					});
 				}
 			})(jQuery);
 
 			$(document).ready(function(){
-				$('#tweets').liveTwitter('<?php echo $twitter; ?>', {mode: 'user_timeline'});
+				$('#tweets').append("<div class='loading'><span>Loading...</span></div>").liveTwitter('<?php echo $twitter; ?>', {mode: 'user_timeline'});
 				$('#blog').loadRSS('<?php echo $blog; ?>');
 				var centre = new google.maps.LatLng(<?php echo $lat . ", " . $lng; ?>);
 				var map = new google.maps.Map(document.getElementById("occupation_map"), {

@@ -287,6 +287,9 @@
             if (twitter.settings.refresh || initialize) {
 
               $.getJSON(twitter.apiURL(), function (json) {
+				  
+				$('div.loading',$(twitter.container)).remove();
+				  
                 var newTweets = 0;
 
                 // The search and regular APIs differ somewhat
