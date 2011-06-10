@@ -7,4 +7,4 @@ SETUP
 
 * Make a config.php file (use config.php.example as a template)
 
-todo: make SQL template
+* Run the occupation.sql file to create the correct database
