@@ -2,17 +2,30 @@
 
 if(isset($_POST['title'])){
 	
-	$_POST['showmap'] = ($_POST['showmap']=="on")?"1":"0";
-	
-	$query = "INSERT INTO occupation VALUES ('', '{$_POST['title']}', '{$_POST['short']}', '{$_POST['twitter']}', '{$_POST['blog']}', '{$_POST['lat']}', '{$_POST['lng']}', '{$_POST['showmap']}', '{$_POST['email']}', '0')";
-	
-	$mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
-	if (!$result = $mysqli->query($query)) {
-		$result = "<b>".$mysqli->error."</b>";
+	if(
+		empty($_POST['title']) ||
+		empty($_POST['short']) ||
+		empty($_POST['lat'])   ||
+		empty($_POST['lng'])   ||
+		empty($_POST['email'])
+	){
+		$result = "<span class='error'>Please fill in all the required fields</span>";
 	}else{
-		$result = "Application submitted. Please check your emails for correspondance.";
+	
+		$_POST['showmap'] = ($_POST['showmap']=="on")?"1":"0";
+		
+		$query = "INSERT INTO occupation VALUES ('', '{$_POST['title']}', '{$_POST['short']}', '{$_POST['twitter']}', '{$_POST['blog']}', '{$_POST['lat']}', '{$_POST['lng']}', '{$_POST['showmap']}', '{$_POST['email']}', '0')";
+		
+		$mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
+		if (!$result = $mysqli->query($query)) {
+			$result = "<span class='error'>{$mysqli->error}</b>";
+		}else{
+			$result = "<span class='success'>Application submitted. Please check your emails for correspondance.</span>";
+		}
+		$mysqli->close();
+		
 	}
-	$mysqli->close();
+	
 }
 
 ?><html>
@@ -25,23 +38,41 @@ if(isset($_POST['title'])){
 		<link rel="stylesheet" href="style.css" />
 		
 		<script type="text/javascript" src="jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="jquery.color.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&region=GB"></script>
 		
 		<script type="text/javascript">
 			$(document).ready(function(){
 				var geocoder = new google.maps.Geocoder();
 				var $map = $('#select_map').hide();
+				var marker;
 				var map = new google.maps.Map($map[0], {
 					zoom: 12,
 					center: new google.maps.LatLng(54.597528,-3.032227),
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				});
+				google.maps.event.addListener(map, 'click', function(event) {
+					placeMarker(event.latLng);
+				});
+				function placeMarker(location) {
+					if(marker == undefined){
+						marker = new google.maps.Marker({
+							position: location, 
+							map: map
+						});
+					}else{
+						marker.setPosition(location);
+					}
+					map.panTo(location);
+					$('input[name=lat]').val(location.lat());
+					$('input[name=lng]').val(location.lng());
+				}
 				// event listener to update lng and lat on click
 				function findAddress(address) {
-					geocoder.geocode( { 'address': address}, function(results, status) {
+					geocoder.geocode( { 'address': address+', UK' }, function(results, status) {
 						if (status == google.maps.GeocoderStatus.OK) {
 							map.panTo(results[0].geometry.location);
-							//var marker = new google.maps.Marker({ map: map, position: results[0].geometry.location });
+							placeMarker(results[0].geometry.location);
 						}else{
 							alert("Geocode was not successful for the following reason: " + status);
 						}
@@ -53,6 +84,7 @@ if(isset($_POST['title'])){
 						findAddress($('#address').val());
 					});
 				});
+				$('span.error, span.success').css({ backgroundColor: 'yellow' }).animate({ backgroundColor: 'transparent' }, 3000);
 			});
 		</script>
 		
@@ -74,7 +106,7 @@ if(isset($_POST['title'])){
 				
 					<legend>Private Information</legend>
 					
-					<label for="email">Email address:</label>
+					<label for="email">Email address *:</label>
 					<input type="email" name="email" />
 				
 				</fieldset>
@@ -83,10 +115,10 @@ if(isset($_POST['title'])){
 					
 					<legend>Public Information</legend>
 			
-					<label for="title">Occupation title:</label>
+					<label for="title">Occupation title *:</label>
 					<input type="text" name="title" />
 					
-					<label for="short">Shortname:</label>
+					<label for="short">Shortname *:</label>
 					<input type="text" name="short" />
 					
 					<label for="twitter">Twitter:</label>
@@ -95,7 +127,7 @@ if(isset($_POST['title'])){
 					<label for="blog">Blog RSS:</label>
 					<input type="text" name="blog" />	
 					
-					<label for="showmap">Show on map?:</label>
+					<label for="showmap">Show on map? *:</label>
 					<input type="checkbox" name="showmap" checked />
 				
 				</fieldset>
@@ -104,7 +136,7 @@ if(isset($_POST['title'])){
 					
 					<legend>Location</legend>
 				
-					<p>Find your location and click it on the map:</p>
+					<p>Find your location and click it on the map (required):</p>
 				
 					<input type="text" class="unrelated" id="address" />
 					<button type="button" class="unrelated" id="search">Search</button>

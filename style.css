@@ -26,6 +26,19 @@ h1 {
 	text-align: center;
 }
 
+.error, .success {
+	font-weight: bold;
+	padding: 4px;
+}
+
+.error {
+	color: darkred;
+}
+
+.success {
+	color: darkgreen;
+}
+
 h1 span {
 	color: darkgrey;
 }
