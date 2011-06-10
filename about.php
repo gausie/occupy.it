@@ -52,8 +52,15 @@
 			
 			<ul>
 				<li>Provide shorturls for blogposts and tweets</li>
+				<ul>
+					<li>Generated automatically for every blogpost, or on demand if the user clicks "Copy shortlink" or something.</li>
+				</ul>
 				<li>Offer a wordpress package for every occupation (maybe on http://blog.occupy.it/ouroccupation, or something)</li>
 				<li>Host information on how to occupy and other knowledge-sharing.</li>
+				<li>Login for occupations to say they if they are in occupation or not and issue a call to arms when they need help</li>
+				<ul>
+					<li>Maybe allow control through hashtags</li>
+				</ul>
 				<li>Anything else anyone can think of.</li>
 			</ul>
 			
