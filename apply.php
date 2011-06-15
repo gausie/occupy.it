@@ -39,6 +39,7 @@ if(isset($_POST['title'])){
 		
 		<base href="<?php echo $config['base']; ?>" />
 		
+		<link rel="stylesheet" href="boilerplate.css" />
 		<link rel="stylesheet" href="style.css" />
 		
 		<script type="text/javascript" src="jquery-1.6.min.js"></script>

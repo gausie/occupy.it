@@ -3,6 +3,7 @@
 	<head>
 		<title>occupy.it; bringing together information about political occupations around the UK</title>
 		
+		<link rel="stylesheet" href="boilerplate.css" />
 		<link rel="stylesheet" href="style.css" />
 		
 		<script type="text/javascript" src="jquery-1.6.min.js"></script>
