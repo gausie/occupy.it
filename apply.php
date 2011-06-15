@@ -24,7 +24,9 @@ if(isset($_POST['title'])){
 		}
 		$mysqli->close();
 		
-		//email
+		$message = "{$_POST['title']} has applied for an occupation profile.";
+		$message = wordwrap($message, 70);
+			mail($config['email'], 'OCCUPY.IT', $message);
 		
 	}
 	

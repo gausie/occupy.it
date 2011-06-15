@@ -1,7 +1,7 @@
 <html>
 
 	<head>
-		<title>occupy.it; bringing together informations about political occupations around the UK</title>
+		<title>occupy.it; bringing together information about political occupations around the UK</title>
 		
 		<link rel="stylesheet" href="style.css" />
 		
@@ -60,6 +60,9 @@
 			<p>Gone into occupation? <a href="./apply/">Get a profile</a>.</p>
 			
 			<p><a href="./about/">What is <b>occupy</b>it?</a></p>
+<?php if(!empty($config['twitter'])){ 
+	echo "\t\t\t<p>Report bugs to <a href=\"http://twitter.com/{$config['twitter']}\">@{$config['twitter']}</a>.</p>";
+} ?>
 
 		</div>
 
