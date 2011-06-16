@@ -102,6 +102,10 @@ form input, form textarea {
 	margin: auto;
 }
 
+.note {
+	font-size: 50%;
+}
+
 form {
   margin: 0 auto 0 auto;
   padding: 0;

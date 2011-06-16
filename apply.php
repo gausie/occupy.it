@@ -89,7 +89,21 @@ if(isset($_POST['title'])){
 						findAddress($('#address').val());
 					});
 				});
-				$('span.error, span.success').css({ backgroundColor: 'yellow' }).animate({ backgroundColor: 'transparent' }, 3000);
+				$('span.error, span.success').css({ backgroundColor: '#FFEF00' }).animate({ backgroundColor: 'transparent' }, 3000);
+				$('input[name=short]').keyup(function(){
+					var $this = $(this);
+					var colour = "#ED1C24";
+					if($this.val().length>=3){
+						$.get("available.php", { 'short': $this.val() }, function(data){
+							if(data=="yes"){
+								colour = "#00A550";
+							}
+							$this.css("background-color",colour);
+						});
+					}else{
+						$this.css("background-color",colour);
+					}
+				});
 			});
 		</script>
 		
@@ -124,7 +138,9 @@ if(isset($_POST['title'])){
 					<input type="text" name="title" />
 					
 					<label for="short">Shortname *:</label>
-					<input type="text" name="short" />
+					<input type="text" name="short" /> 
+					
+					<div class="note">This must be longer than 2 characters and unique.</div>
 					
 					<label for="twitter">Twitter:</label>
 					<input type="text" name="twitter" />	
