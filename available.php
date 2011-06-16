@@ -3,7 +3,7 @@
 include("config.php");
 
 $mysqli = new mysqli($config['hostname'],$config['username'],$config['password'],$config['database']);
-$query = "SELECT COUNT(*) as number FROM occupation WHERE short = '{$_GET['short']}'";
+$query = "SELECT COUNT(*) as number FROM occupation WHERE short = '{$_GET['short']}' AND verified='1'";
 $result = $mysqli->query($query)->fetch_object();
 $mysqli->close();
 
