@@ -17,6 +17,8 @@
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				});
 				var markers = [];
+				var balloons = [];
+				var last_balloon;
 				var bounds = new google.maps.LatLngBounds();
 				
 <?php
@@ -32,8 +34,13 @@
 					echo "\t\t\t\t\tmap: map,\n";
 					echo "\t\t\t\t\ttitle: '{$row->title}'\n";
 					echo "\t\t\t\t});\n";
+					echo "\t\t\t\tballoons[{$row->id}] = new google.maps.InfoWindow({\n";
+					echo "\t\t\t\t\tcontent: \"{$row->title}<br /><br /><a href='./{$row->short}/'>[profile]</a>\"\n";
+					echo "\t\t\t\t});\n";
 					echo "\t\t\t\tgoogle.maps.event.addListener(markers[{$row->id}], 'click', function() {\n";
-					echo "\t\t\t\t\tlocation.href = './{$row->short}/';\n";
+					echo "\t\t\t\t\tif(last_balloon !== undefined) { last_balloon.close(); }\n";
+					echo "\t\t\t\t\tballoons[{$row->id}].open(map,markers[{$row->id}]);\n";
+					echo "\t\t\t\t\tlast_balloon = balloons[{$row->id}];\n";
 					echo "\t\t\t\t});\n";
 					echo "\t\t\t\tbounds.extend(markers[{$row->id}].getPosition());\n";
 					echo "\n";
